@@ -1,0 +1,16 @@
+experiments:
+  checkout_progress_indicator:
+    owner: product_analytics
+    hypothesis: "A checkout progress indicator increases purchase conversion without hurting engagement or support load."
+    allocation:
+      control: 0.50
+      treatment: 0.50
+    primary_metric: conversion_rate
+    guardrails:
+      - sessions_per_user
+      - support_tickets_per_user
+      - avg_session_duration_seconds
+    launch_criteria:
+      min_relative_lift: 0.01
+      max_p_value: 0.05
+      require_quality_status: pass

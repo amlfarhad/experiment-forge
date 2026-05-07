@@ -1,131 +1,118 @@
-# experiment-forge — Statistical Experimentation Platform
+# experiment-forge
 
-Most A/B testing tutorials teach you to run a t-test and check if p < 0.05. In production at FAANG-scale, that's about 10% of the work. The other 90% is everything this project covers: knowing when your experiment is broken, reducing the sample you need, stopping early without lying to yourself, and making decisions when you have multiple metrics.
+Product experimentation analytics platform built with Python, SQL, DuckDB, and Plotly.
 
-This platform implements the techniques that power experimentation at Microsoft, Netflix, Meta, and Google — with simulations that **prove** why each technique matters.
+Experiment Forge turns raw product event data into tested experiment marts, audits common experimentation failures, analyzes treatment impact, and writes decision-ready artifacts for product stakeholders.
 
-## What Makes This Different
+## Why This Is Different
 
-| Technique | What It Does | Why It Matters | Where It's Used |
-|-----------|-------------|----------------|-----------------|
-| **CUPED** | Reduces metric variance using pre-experiment data | 40-50% fewer users needed for same statistical power | Microsoft, Netflix, Meta |
-| **Sequential Testing** | Valid p-values at any point during the experiment | Stop experiments early without inflating false positives | Optimizely, Netflix |
-| **Peeking Simulation** | Proves that naive continuous monitoring gives ~26% FPR | Understanding this is table stakes for DS interviews | Every mature platform |
-| **SRM Detection** | Catches broken randomization before you analyze | The #1 experiment diagnostic — catches pipeline bugs | Microsoft, Google |
-| **Multi-Armed Bandits** | Adaptively routes traffic to winning variants | Minimizes user exposure to worse experiences | Google, Spotify |
-| **Bayesian A/B Testing** | Answers "P(B > A)?" instead of "P(data \| no effect)?" | More intuitive, no peeking problem, natural stopping | Netflix, Spotify |
-| **Delta Method** | Correct variance for ratio metrics (revenue/session) | Naive SE is wrong for ratio metrics — delta method fixes it | Uber, Airbnb |
+Most A/B testing examples stop at a p-value. Real experimentation work needs a full data platform around the test:
 
-## Simulations That Prove Understanding
-
-### The Peeking Problem
-```
-$ python -m simulations.peeking_sim
-
-With 20 peeks at α=0.05:
-  Fixed-horizon FPR: 4.8% (expected 5.0%)
-  Peeking FPR:       26.1% (inflated 5.2x)
-
-  Peeking inflates false positives by 5.2x!
-```
-
-### CUPED Variance Reduction
-```
-$ python -m simulations.cuped_sim
-
-With pre/post correlation of 0.7:
-  Standard power: 62.4%
-  CUPED power:    91.2% (+28.8%)
-  Effective sample multiplier: 2.0x
-
-  CUPED makes 5,000 users as powerful as 10,000 users without CUPED.
-```
-
-### SRM Detection Across Scenarios
-```
-$ python -m simulations.srm_sim
-
-  clean_50_50                | detection_rate=  0.1%
-  slight_imbalance (50.5%)   | detection_rate= 12.3%
-  moderate_imbalance (52%)   | detection_rate= 99.8%
-  severe_imbalance (55%)     | detection_rate=100.0%
-```
-
-## Modules
-
-### Core (`core/`)
-- **`experiment.py`** — Continuous metrics (Welch's t-test), proportions (z-test), ratio metrics (delta method)
-- **`power_analysis.py`** — Sample size calculation, power curves, MDE estimation
-- **`sequential.py`** — Group sequential testing with O'Brien-Fleming and Pocock alpha spending
-- **`multiple_testing.py`** — Bonferroni, Holm-Bonferroni, Benjamini-Hochberg (FDR)
-
-### Variance Reduction (`variance_reduction/`)
-- **`cuped.py`** — CUPED implementation with experiment-level analysis
-- **`stratification.py`** — Stratified estimation for heterogeneous populations
-
-### Advanced (`advanced/`)
-- **`bandits.py`** — Epsilon-Greedy, UCB1, Thompson Sampling with regret simulation
-- **`bayesian.py`** — Bayesian A/B testing for proportions and continuous metrics
-- **`interference.py`** — Network spillover detection and interference simulation
-
-### Simulations (`simulations/`)
-- **`peeking_sim.py`** — Proves peeking inflates FPR to ~26%
-- **`cuped_sim.py`** — Demonstrates 40-50% variance reduction with correlated covariates
-- **`srm_sim.py`** — SRM detection sensitivity across imbalance levels
+- canonical exposure and assignment data
+- raw-to-staging warehouse models
+- reusable user-level and daily metric marts
+- sample ratio mismatch checks
+- duplicate and multi-variant assignment detection
+- temporal validity checks for events before assignment
+- guardrail metrics for engagement and support load
+- launch / hold / iterate recommendations
+- readable reports and an interactive dashboard
 
 ## Quick Start
 
 ```bash
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-
-# Run all demonstrations
-python pipeline.py
-
-# Run individual simulations
-python -m simulations.peeking_sim
-python -m simulations.cuped_sim
-python -m simulations.srm_sim
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+python3 forge.py demo --workspace . --users 5000 --seed 42
 ```
 
-## Testing
+The demo writes:
+
+- `data/sample/*.csv`
+- `data/warehouse/experiment_forge.duckdb`
+- `reports/quality_audit.json`
+- `reports/analysis.json`
+- `reports/sample_quality_audit.md`
+- `reports/sample_experiment_readout.md`
+- `reports/dashboard.html`
+
+## CLI
 
 ```bash
-pytest tests/ -v
+python3 forge.py generate-demo-data --workspace .
+python3 forge.py build-warehouse --workspace .
+python3 forge.py audit-experiment --workspace .
+python3 forge.py analyze --workspace .
+python3 forge.py report --workspace .
+python3 forge.py demo --workspace .
 ```
 
-## Project Structure
+## Platform Layers
 
-```
-experiment-forge/
-├── pipeline.py                         # Run all demos
-├── core/
-│   ├── experiment.py                   # t-test, z-test, delta method
-│   ├── power_analysis.py               # Sample size & power curves
-│   ├── sequential.py                   # Group sequential testing
-│   └── multiple_testing.py             # Bonferroni, BH, Holm
-├── variance_reduction/
-│   ├── cuped.py                        # CUPED implementation
-│   └── stratification.py              # Stratified estimation
-├── advanced/
-│   ├── bandits.py                      # ε-Greedy, UCB1, Thompson Sampling
-│   ├── bayesian.py                     # Bayesian A/B testing
-│   └── interference.py                # Network spillover detection
-├── simulations/
-│   ├── peeking_sim.py                  # Peeking problem proof
-│   ├── cuped_sim.py                    # CUPED benefit demonstration
-│   └── srm_sim.py                      # SRM detection sensitivity
-└── tests/
-    ├── test_experiment.py
-    ├── test_cuped.py
-    ├── test_bandits.py
-    └── test_sequential.py
+| Layer | Purpose |
+|---|---|
+| `data_generation/` | Synthetic source systems for users, assignments, events, sessions, orders, exposures, support tickets, and daily snapshots |
+| `warehouse/` | DuckDB raw, staging, intermediate, and mart models |
+| `quality/` | Assignment, source, temporal, mart, and guardrail checks |
+| `analysis/` | Statistical readout and decision recommendation |
+| `reporting/` | Markdown reports and Plotly HTML dashboard |
+| `config/` | Experiment and metric registry |
+
+## Warehouse Models
+
+```text
+raw_* source tables
+  -> stg_* cleaned source models
+  -> int_canonical_assignments
+  -> int_user_experiment_metrics
+  -> int_daily_experiment_metrics
+  -> mart_experiment_readout
+  -> mart_metric_guardrails
+  -> mart_segment_readout
+  -> mart_experiment_health
 ```
 
-## References
+## Quality Checks
 
-- Deng et al., 2013 — *Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data* (CUPED, Microsoft)
-- Johari et al., 2017 — *Peeking at A/B Tests* (Always-valid inference)
-- Fabijan et al., 2019 — *Diagnosing Sample Ratio Mismatch in Online Controlled Experiments* (SRM, Microsoft)
-- Chapelle et al., 2011 — *An Empirical Evaluation of Thompson Sampling* (Bandits)
-- Kohavi et al., 2020 — *Trustworthy Online Controlled Experiments* (A/B Testing Bible)
+- Sample ratio mismatch
+- Duplicate assignments
+- Multiple variant assignments
+- Missing assignment timestamps
+- Events before assignment
+- Null event names
+- Negative revenue
+- Required mart row counts
+- Sessions-per-user guardrail
+
+## Statistical Modules
+
+The original statistics toolkit is still included:
+
+- Welch and Student t-tests
+- Two-proportion z-tests
+- Delta method ratio metrics
+- Power analysis and MDE estimation
+- Sequential testing
+- CUPED variance reduction
+- Multiple testing correction
+- Bayesian A/B testing
+- Multi-armed bandit simulations
+
+## Reports
+
+Sample generated artifacts:
+
+- [`reports/sample_quality_audit.md`](reports/sample_quality_audit.md)
+- [`reports/sample_experiment_readout.md`](reports/sample_experiment_readout.md)
+- `reports/dashboard.html`
+
+## Tests
+
+```bash
+python3 -m pytest tests -q
+```
+
+## Portfolio Summary
+
+Built an experimentation analytics platform using Python, SQL, and DuckDB to generate product event data, model experiment metric marts, detect SRM/assignment/data-quality failures, and produce launch recommendations with primary and guardrail metrics.

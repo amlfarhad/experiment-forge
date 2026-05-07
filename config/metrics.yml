@@ -1,0 +1,27 @@
+metrics:
+  conversion_rate:
+    owner: product_analytics
+    grain: assigned_user
+    numerator: "users with >=1 post-assignment purchase event"
+    denominator: "canonically assigned users"
+    decision_role: primary
+  revenue_per_user:
+    owner: finance_analytics
+    grain: assigned_user
+    definition: "positive post-assignment order revenue divided by assigned users"
+    decision_role: secondary
+  sessions_per_user:
+    owner: product_analytics
+    grain: assigned_user
+    definition: "post-assignment sessions divided by assigned users"
+    decision_role: guardrail
+  support_tickets_per_user:
+    owner: customer_ops_analytics
+    grain: assigned_user
+    definition: "post-assignment support tickets divided by assigned users"
+    decision_role: guardrail
+  avg_session_duration_seconds:
+    owner: product_analytics
+    grain: session
+    definition: "average post-assignment session duration"
+    decision_role: guardrail

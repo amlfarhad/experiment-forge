@@ -1,0 +1,33 @@
+{
+  "experiment_name": "checkout_progress_indicator",
+  "primary_metric": "conversion_rate",
+  "control": {
+    "variant": "control",
+    "assigned_users": 544,
+    "conversions": 144,
+    "conversion_rate": 0.2647058823529412,
+    "revenue_per_user": 17.47384191176471,
+    "sessions_per_user": 4.295955882352941,
+    "support_tickets_per_user": 0.022058823529411766
+  },
+  "treatment": {
+    "variant": "treatment",
+    "assigned_users": 456,
+    "conversions": 134,
+    "conversion_rate": 0.29385964912280704,
+    "revenue_per_user": 20.525614035087724,
+    "sessions_per_user": 4.618421052631579,
+    "support_tickets_per_user": 0.02850877192982456
+  },
+  "absolute_lift": 0.029153766769865863,
+  "relative_lift": 0.11013645224171548,
+  "p_value": 0.30540585728123437,
+  "ci_lower": -0.026725675051632716,
+  "ci_upper": 0.08503320859136444,
+  "recommendation": "hold",
+  "rationale": [
+    "Critical quality checks failed, so the result should not be used for launch decisions yet.",
+    "Support ticket burden is higher for treatment."
+  ],
+  "quality_status": "fail"
+}
