@@ -4,9 +4,9 @@ Product experimentation analytics platform built with Python, SQL, DuckDB, and P
 
 Experiment Forge turns raw product event data into tested experiment marts, audits common experimentation failures, analyzes treatment impact, and writes decision-ready artifacts for product stakeholders.
 
-## Why This Is Different
+## Platform Capabilities
 
-Most A/B testing examples stop at a p-value. Real experimentation work needs a full data platform around the test:
+Experimentation work needs a full data platform around the test:
 
 - canonical exposure and assignment data
 - raw-to-staging warehouse models
