@@ -9,3 +9,5 @@ venv/
 .DS_Store
 data/warehouse/*.duckdb
 data/warehouse/*.wal
+data/sample/credit_risk/
+reports/credit_loss_scored_holdout.csv

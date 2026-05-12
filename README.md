@@ -46,6 +46,7 @@ python3 forge.py audit-experiment --workspace .
 python3 forge.py analyze --workspace .
 python3 forge.py report --workspace .
 python3 forge.py demo --workspace .
+python3 forge.py credit-risk-demo --workspace . --loans 6000 --seed 42
 ```
 
 ## Platform Layers
@@ -56,6 +57,7 @@ python3 forge.py demo --workspace .
 | `warehouse/` | DuckDB raw, staging, intermediate, and mart models |
 | `quality/` | Assignment, source, temporal, mart, and guardrail checks |
 | `analysis/` | Statistical readout and decision recommendation |
+| `credit_risk/` | Auto-finance PD, LGD, EAD, expected credit loss, and stress-scenario modeling |
 | `reporting/` | Markdown reports and Plotly HTML dashboard |
 | `config/` | Experiment and metric registry |
 
@@ -98,6 +100,24 @@ The original statistics toolkit is still included:
 - Multiple testing correction
 - Bayesian A/B testing
 - Multi-armed bandit simulations
+
+## Credit Loss Forecasting
+
+Experiment Forge includes an auto-finance credit-risk workflow for portfolio loss forecasting:
+
+- synthetic auto-loan origination and monthly performance data
+- borrower risk, loan term, LTV, APR, collateral, delinquency, and macroeconomic drivers
+- Probability of Default (PD), Loss Given Default (LGD), and Exposure at Default (EAD) models
+- Expected Credit Loss (ECL) scoring using PD x LGD x EAD
+- holdout validation with PD AUC, Brier score, LGD MAE, and EAD MAPE
+- stress scenario with unemployment, used-vehicle collateral, and rate shocks
+- model governance readout with assumptions, validation results, and high-loss segments
+
+Generated artifacts:
+
+- `reports/credit_loss_forecast.json`
+- `reports/credit_loss_forecast_readout.md`
+- `reports/credit_loss_scored_holdout.csv`
 
 ## Reports
 

@@ -7,6 +7,9 @@ import json
 from pathlib import Path
 
 from analysis.experiment_readout import analyze_experiment
+from credit_risk.modeling import run_credit_loss_forecast
+from credit_risk.reports import write_credit_loss_report
+from credit_risk.synthetic_auto import generate_auto_loan_portfolio
 from data_generation.synthetic_product import generate_demo_data
 from quality.checks import run_quality_audit
 from reporting.reports import write_dashboard_html, write_experiment_readout, write_quality_audit
@@ -79,6 +82,20 @@ def cmd_demo(args: argparse.Namespace) -> None:
     cmd_report(args, audit=audit, analysis=analysis)
 
 
+def cmd_credit_risk_demo(args: argparse.Namespace) -> None:
+    paths = workspace_paths(args.workspace)
+    raw_dir = paths["raw"] / "credit_risk"
+    manifest = generate_auto_loan_portfolio(raw_dir, seed=args.seed, n_loans=args.loans)
+    forecast = run_credit_loss_forecast(raw_dir, paths["reports"])
+    write_credit_loss_report(forecast, paths["reports"])
+    print(
+        "Credit loss forecast: "
+        f"loans={args.loans}, files=3, pd_auc={forecast.pd_auc:.3f}, "
+        f"stress_lift={forecast.stress_lift:.1%}, reports={paths['reports']}"
+    )
+    print(f"Source files: {manifest.loans_path}, {manifest.performance_path}, {manifest.macro_path}")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Experiment Forge product experimentation platform")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -93,6 +110,12 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.choices["analyze"].set_defaults(func=cmd_analyze)
     subparsers.choices["report"].set_defaults(func=cmd_report)
     subparsers.choices["demo"].set_defaults(func=cmd_demo)
+
+    credit_parser = subparsers.add_parser("credit-risk-demo")
+    credit_parser.add_argument("--workspace", default=".", help="Workspace for data and report artifacts")
+    credit_parser.add_argument("--loans", type=int, default=6000, help="Number of synthetic auto loans")
+    credit_parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
+    credit_parser.set_defaults(func=cmd_credit_risk_demo)
     return parser
 
 

@@ -1,0 +1,57 @@
+{
+  "pd_auc": 0.7567,
+  "pd_brier": 0.0132,
+  "lgd_mae": 0.0673,
+  "ead_mape": 0.0004,
+  "baseline_expected_loss": 6673263.17,
+  "stress_expected_loss": 9854388.91,
+  "stress_lift": 0.4767,
+  "high_risk_segments": [
+    {
+      "fico_band": "subprime",
+      "vehicle_type": "used",
+      "loans": 533,
+      "default_rate": 0.0511,
+      "avg_pd": 0.0462,
+      "avg_lgd": 0.5127,
+      "expected_loss": 2303007.9
+    },
+    {
+      "fico_band": "near_prime",
+      "vehicle_type": "used",
+      "loans": 732,
+      "default_rate": 0.0214,
+      "avg_pd": 0.0205,
+      "avg_lgd": 0.5134,
+      "expected_loss": 1443010.19
+    },
+    {
+      "fico_band": "subprime",
+      "vehicle_type": "new",
+      "loans": 483,
+      "default_rate": 0.0193,
+      "avg_pd": 0.0216,
+      "avg_lgd": 0.3693,
+      "expected_loss": 692215.64
+    },
+    {
+      "fico_band": "near_prime",
+      "vehicle_type": "new",
+      "loans": 911,
+      "default_rate": 0.0112,
+      "avg_pd": 0.0104,
+      "avg_lgd": 0.3755,
+      "expected_loss": 670418.68
+    },
+    {
+      "fico_band": "prime",
+      "vehicle_type": "used",
+      "loans": 515,
+      "default_rate": 0.0136,
+      "avg_pd": 0.0114,
+      "avg_lgd": 0.5135,
+      "expected_loss": 544131.55
+    }
+  ],
+  "records_scored": 54000
+}
