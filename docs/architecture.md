@@ -1,6 +1,6 @@
 # Architecture
 
-Product Experiments is a local product experimentation analytics platform. It mirrors the shape of a real analytics engineering workflow while staying fully cloneable on a laptop.
+Experiment Forge is a local product experimentation analytics platform. It mirrors the shape of a real analytics engineering workflow while staying fully cloneable on a laptop.
 
 ## System Flow
 

@@ -1,6 +1,6 @@
 # Portfolio Positioning
 
-Product Experiments should be presented as the product analytics and analytics engineering proof point in Amal's portfolio.
+Experiment Forge should be presented as the product analytics and analytics engineering proof point in Amal's portfolio.
 
 ## Resume Bullet
 

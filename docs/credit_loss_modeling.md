@@ -1,6 +1,6 @@
 # Credit Loss Modeling
 
-The credit-risk workflow extends Product Experiments from product experimentation into auto-finance portfolio forecasting. It is designed around the model components used in credit loss analysis: Probability of Default (PD), Loss Given Default (LGD), Exposure at Default (EAD), and Expected Credit Loss (ECL).
+The credit-risk workflow extends Experiment Forge from product experimentation into auto-finance portfolio forecasting. It is designed around the model components used in credit loss analysis: Probability of Default (PD), Loss Given Default (LGD), Exposure at Default (EAD), and Expected Credit Loss (ECL).
 
 ## Workflow
 

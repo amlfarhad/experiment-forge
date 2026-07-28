@@ -1,4 +1,4 @@
-"""Decision analysis for Product Experiments marts."""
+"""Decision analysis for Experiment Forge marts."""
 
 from __future__ import annotations
 
