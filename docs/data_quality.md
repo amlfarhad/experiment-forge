@@ -1,6 +1,6 @@
 # Data Quality
 
-Experiment Forge treats data validity as part of experimentation, not as a cleanup step after analysis.
+Product Experiments treats data validity as part of experimentation, not as a cleanup step after analysis.
 
 ## Check Groups
 

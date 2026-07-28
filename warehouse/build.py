@@ -1,4 +1,4 @@
-"""Build a local DuckDB warehouse from Experiment Forge source CSVs."""
+"""Build a local DuckDB warehouse from Product Experiments source CSVs."""
 
 from __future__ import annotations
 

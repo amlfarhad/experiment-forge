@@ -1,8 +1,8 @@
-# experiment-forge
+# Product Experiments
 
 Product experimentation analytics platform built with Python, SQL, DuckDB, and Plotly.
 
-Experiment Forge turns raw product event data into tested experiment marts, audits common experimentation failures, analyzes treatment impact, and writes decision-ready artifacts for product stakeholders.
+Product Experiments turns raw product event data into tested experiment marts, audits common experimentation failures, analyzes treatment impact, and writes decision-ready artifacts for product stakeholders.
 
 ## Platform Capabilities
 
@@ -103,7 +103,7 @@ The original statistics toolkit is still included:
 
 ## Credit Loss Forecasting
 
-Experiment Forge includes an auto-finance credit-risk workflow for portfolio loss forecasting:
+Product Experiments includes an auto-finance credit-risk workflow for portfolio loss forecasting:
 
 - synthetic auto-loan origination and monthly performance data
 - borrower risk, loan term, LTV, APR, collateral, delinquency, and macroeconomic drivers

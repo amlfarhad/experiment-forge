@@ -1,4 +1,4 @@
-"""Command-line workflow for Experiment Forge."""
+"""Command-line workflow for Product Experiments."""
 
 from __future__ import annotations
 
@@ -97,7 +97,7 @@ def cmd_credit_risk_demo(args: argparse.Namespace) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Experiment Forge product experimentation platform")
+    parser = argparse.ArgumentParser(description="Product Experiments analytics workflow")
     subparsers = parser.add_subparsers(dest="command", required=True)
     for command_name in ["generate-demo-data", "build-warehouse", "audit-experiment", "analyze", "report", "demo"]:
         subparser = subparsers.add_parser(command_name)

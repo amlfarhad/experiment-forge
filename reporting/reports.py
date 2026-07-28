@@ -131,7 +131,7 @@ def write_dashboard_html(db_path: str | Path, analysis: ExperimentAnalysis, outp
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Experiment Forge Dashboard</title>
+  <title>Product Experiments Dashboard</title>
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; color: #111827; }}
     header {{ max-width: 980px; margin-bottom: 24px; }}
@@ -144,7 +144,7 @@ def write_dashboard_html(db_path: str | Path, analysis: ExperimentAnalysis, outp
 <body>
   <header>
     <div class="badge">{analysis.experiment_name}</div>
-    <h1>Experiment Forge Dashboard</h1>
+    <h1>Product Experiments Dashboard</h1>
     <p>Recommendation: <strong>{analysis.recommendation.upper()}</strong></p>
   </header>
   <section class="grid">

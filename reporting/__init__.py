@@ -1,1 +1,1 @@
-"""Markdown and HTML reporting for Experiment Forge."""
+"""Markdown and HTML reporting for Product Experiments."""

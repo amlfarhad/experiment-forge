@@ -19,7 +19,7 @@ from advanced.bayesian import bayesian_proportion_test
 def run_all_demos():
     """Run all experiment-forge demonstrations."""
     print("=" * 70)
-    print("  experiment-forge — Statistical Experimentation Platform")
+    print("  Product Experiments — Statistical Experimentation Platform")
     print("=" * 70)
 
     # ── 1. Power Analysis ──────────────────────────────────────────
@@ -131,7 +131,7 @@ def run_all_demos():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="experiment-forge — Run all demos")
+    parser = argparse.ArgumentParser(description="Product Experiments — Run all demos")
     parser.add_argument("--quick", action="store_true", help="Fewer simulations for speed")
     args = parser.parse_args()
     run_all_demos()
