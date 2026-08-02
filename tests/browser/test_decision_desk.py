@@ -6,6 +6,13 @@ from playwright.sync_api import expect, sync_playwright
 
 SCREENSHOT_DIR = Path(os.environ.get("EXPERIMENT_FORGE_SCREENSHOT_DIR", "/tmp/experiment-forge-screens"))
 BASE_URL = os.environ.get("EXPERIMENT_FORGE_BASE_URL", "http://127.0.0.1:8765")
+APP_PATH = os.environ.get("EXPERIMENT_FORGE_APP_PATH", "/web/")
+
+
+def app_url(query: str = "") -> str:
+    path = APP_PATH if APP_PATH.startswith("/") else f"/{APP_PATH}"
+    url = f"{BASE_URL.rstrip('/')}{path}"
+    return f"{url}?{query}" if query else url
 
 
 def test_decision_desk_critical_browser_path():
@@ -19,7 +26,7 @@ def test_decision_desk_critical_browser_path():
         page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" else None)
         page.on("requestfailed", lambda request: request_failures.append(f"{request.url}: {request.failure}"))
 
-        page.goto(f"{BASE_URL}/web/", wait_until="networkidle")
+        page.goto(app_url(), wait_until="networkidle")
         expect(page).to_have_title("Experiment Forge · Decision Desk")
         expect(page.locator("#landing-view")).to_be_visible()
         expect(page.locator("[data-workspace='checkout_progress_indicator']")).to_be_visible()
@@ -55,7 +62,7 @@ def test_decision_desk_critical_browser_path():
         expect(page.locator("#validation-result")).to_contain_text("Schema looks valid")
         page.screenshot(path=str(SCREENSHOT_DIR / "launch-workspace.png"), full_page=True)
 
-        page.goto(f"{BASE_URL}/web/?experiment=checkout_progress_indicator", wait_until="networkidle")
+        page.goto(app_url("experiment=checkout_progress_indicator"), wait_until="networkidle")
         expect(page.locator("#workspace-view h1")).to_contain_text("Checkout progress indicator")
         expect(page.locator(".decision-word")).to_have_text("investigate")
 
