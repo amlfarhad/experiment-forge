@@ -13,6 +13,7 @@ from credit_risk.synthetic_auto import generate_auto_loan_portfolio
 from data_generation.synthetic_product import generate_demo_data
 from quality.checks import run_quality_audit
 from reporting.reports import write_dashboard_html, write_experiment_readout, write_quality_audit
+from web_artifacts import write_web_artifacts
 from warehouse.build import build_warehouse
 
 
@@ -96,6 +97,17 @@ def cmd_credit_risk_demo(args: argparse.Namespace) -> None:
     print(f"Source files: {manifest.loans_path}, {manifest.performance_path}, {manifest.macro_path}")
 
 
+def cmd_web_build(args: argparse.Namespace) -> None:
+    output_dir = Path(args.output)
+    if not output_dir.is_absolute():
+        output_dir = Path(args.workspace) / output_dir
+    manifest = write_web_artifacts(output_dir, n_users=args.users, seed=args.seed)
+    print(
+        f"Built Decision Desk artifacts: {len(manifest['experiments'])} experiments in {output_dir} "
+        f"(seed={manifest['seed']}, users={manifest['n_users']})"
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Experiment Forge product experimentation platform")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -116,6 +128,13 @@ def build_parser() -> argparse.ArgumentParser:
     credit_parser.add_argument("--loans", type=int, default=6000, help="Number of synthetic auto loans")
     credit_parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
     credit_parser.set_defaults(func=cmd_credit_risk_demo)
+
+    web_parser = subparsers.add_parser("web-build")
+    web_parser.add_argument("--workspace", default=".", help="Repository workspace for browser artifacts")
+    web_parser.add_argument("--output", default="web/data", help="Directory for browser JSON artifacts")
+    web_parser.add_argument("--users", type=int, default=5000, help="Users per synthetic sample workspace")
+    web_parser.add_argument("--seed", type=int, default=42, help="Deterministic seed for the flawed sample")
+    web_parser.set_defaults(func=cmd_web_build)
     return parser
 
 

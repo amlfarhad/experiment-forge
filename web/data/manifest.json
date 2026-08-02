@@ -1,0 +1,10 @@
+{
+  "artifact_contract": "Each JSON payload is generated from raw CSVs, DuckDB marts, quality audit, and statistical analysis.",
+  "experiments": [
+    "checkout_progress_indicator",
+    "search_autocomplete_refresh"
+  ],
+  "n_users": 5000,
+  "schema_version": "1.0",
+  "seed": 42
+}

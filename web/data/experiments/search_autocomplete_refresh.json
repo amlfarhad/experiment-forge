@@ -1,0 +1,833 @@
+{
+  "analysis": {
+    "absolute_lift": 0.0948479176,
+    "adjusted_p_value": 0.0,
+    "ci_lower": 0.0697331776,
+    "ci_upper": 0.1199626575,
+    "confirmatory_metrics": [
+      {
+        "adjusted_p_value": 0.0,
+        "effect": 0.3846438351,
+        "metric": "conversion_rate",
+        "p_value": 0.0,
+        "role": "primary",
+        "significant": true
+      },
+      {
+        "adjusted_p_value": 0.0,
+        "effect": 0.4770594671,
+        "metric": "revenue_per_user",
+        "p_value": 0.0,
+        "role": "secondary",
+        "significant": true
+      }
+    ],
+    "control": {
+      "assigned_users": 2490,
+      "avg_session_duration_seconds": 325.7345250723,
+      "conversion_rate": 0.2465863454,
+      "conversions": 614,
+      "high_priority_tickets_per_user": 0.0080321285,
+      "negative_revenue_user_rate": 0.0,
+      "revenue_per_user": 17.1123052209,
+      "sessions_per_user": 4.4662650602,
+      "support_tickets_per_user": 0.0277108434,
+      "variant": "control"
+    },
+    "decision": "launch",
+    "effect_size": 0.2087970811,
+    "experiment_name": "search_autocomplete_refresh",
+    "multiple_testing_method": "Holm-Bonferroni",
+    "p_value": 0.0,
+    "practical_significance": true,
+    "practical_threshold": 0.01,
+    "primary_metric": "conversion_rate",
+    "quality_status": "pass",
+    "rationale": [
+      "Treatment improved the primary metric with adjusted statistical significance and cleared the practical threshold.",
+      "Support ticket burden is higher for treatment.",
+      "The primary and secondary metrics use Holm-Bonferroni adjustment; segments remain exploratory."
+    ],
+    "recommendation": "launch",
+    "relative_lift": 0.3846438351,
+    "test_statistic": 7.358972349,
+    "treatment": {
+      "assigned_users": 2510,
+      "avg_session_duration_seconds": 328.9083115181,
+      "conversion_rate": 0.3414342629,
+      "conversions": 857,
+      "high_priority_tickets_per_user": 0.006374502,
+      "negative_revenue_user_rate": 0.0,
+      "revenue_per_user": 25.2758924303,
+      "sessions_per_user": 4.5625498008,
+      "support_tickets_per_user": 0.0330677291,
+      "variant": "treatment"
+    }
+  },
+  "daily_trend": [
+    {
+      "cumulative_events": 81.0,
+      "cumulative_revenue": 219.14,
+      "cumulative_sessions": 0.0,
+      "snapshot_date": "2026-03-01",
+      "users": 175.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 97.0,
+      "cumulative_revenue": 364.41,
+      "cumulative_sessions": 0.0,
+      "snapshot_date": "2026-03-01",
+      "users": 163.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 350.0,
+      "cumulative_revenue": 629.93,
+      "cumulative_sessions": 31.0,
+      "snapshot_date": "2026-03-02",
+      "users": 351.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 391.0,
+      "cumulative_revenue": 1081.43,
+      "cumulative_sessions": 38.0,
+      "snapshot_date": "2026-03-02",
+      "users": 338.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 810.0,
+      "cumulative_revenue": 1287.09,
+      "cumulative_sessions": 106.0,
+      "snapshot_date": "2026-03-03",
+      "users": 528.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 900.0,
+      "cumulative_revenue": 2261.84,
+      "cumulative_sessions": 106.0,
+      "snapshot_date": "2026-03-03",
+      "users": 527.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 1416.0,
+      "cumulative_revenue": 2166.79,
+      "cumulative_sessions": 253.0,
+      "snapshot_date": "2026-03-04",
+      "users": 692.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 1601.0,
+      "cumulative_revenue": 3752.74,
+      "cumulative_sessions": 278.0,
+      "snapshot_date": "2026-03-04",
+      "users": 717.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 2190.0,
+      "cumulative_revenue": 3211.78,
+      "cumulative_sessions": 456.0,
+      "snapshot_date": "2026-03-05",
+      "users": 859.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 2487.0,
+      "cumulative_revenue": 5573.13,
+      "cumulative_sessions": 471.0,
+      "snapshot_date": "2026-03-05",
+      "users": 897.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 3149.0,
+      "cumulative_revenue": 4473.66,
+      "cumulative_sessions": 699.0,
+      "snapshot_date": "2026-03-06",
+      "users": 1028.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 3583.0,
+      "cumulative_revenue": 7672.22,
+      "cumulative_sessions": 759.0,
+      "snapshot_date": "2026-03-06",
+      "users": 1083.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 4280.0,
+      "cumulative_revenue": 5922.64,
+      "cumulative_sessions": 1047.0,
+      "snapshot_date": "2026-03-07",
+      "users": 1203.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 4914.0,
+      "cumulative_revenue": 10034.27,
+      "cumulative_sessions": 1099.0,
+      "snapshot_date": "2026-03-07",
+      "users": 1274.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 5576.0,
+      "cumulative_revenue": 7659.39,
+      "cumulative_sessions": 1399.0,
+      "snapshot_date": "2026-03-08",
+      "users": 1391.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 6406.0,
+      "cumulative_revenue": 12712.19,
+      "cumulative_sessions": 1503.0,
+      "snapshot_date": "2026-03-08",
+      "users": 1462.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 7001.0,
+      "cumulative_revenue": 9572.33,
+      "cumulative_sessions": 1782.0,
+      "snapshot_date": "2026-03-09",
+      "users": 1556.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 8097.0,
+      "cumulative_revenue": 15693.46,
+      "cumulative_sessions": 1919.0,
+      "snapshot_date": "2026-03-09",
+      "users": 1654.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 8669.0,
+      "cumulative_revenue": 11733.01,
+      "cumulative_sessions": 2267.0,
+      "snapshot_date": "2026-03-10",
+      "users": 1743.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 9939.0,
+      "cumulative_revenue": 18944.15,
+      "cumulative_sessions": 2438.0,
+      "snapshot_date": "2026-03-10",
+      "users": 1815.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 10479.0,
+      "cumulative_revenue": 14123.18,
+      "cumulative_sessions": 2797.0,
+      "snapshot_date": "2026-03-11",
+      "users": 1936.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 11977.0,
+      "cumulative_revenue": 22482.17,
+      "cumulative_sessions": 2982.0,
+      "snapshot_date": "2026-03-11",
+      "users": 1983.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 12499.0,
+      "cumulative_revenue": 16741.93,
+      "cumulative_sessions": 3367.0,
+      "snapshot_date": "2026-03-12",
+      "users": 2121.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 14236.0,
+      "cumulative_revenue": 26370.33,
+      "cumulative_sessions": 3605.0,
+      "snapshot_date": "2026-03-12",
+      "users": 2171.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 14682.0,
+      "cumulative_revenue": 19572.51,
+      "cumulative_sessions": 4014.0,
+      "snapshot_date": "2026-03-13",
+      "users": 2296.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 16665.0,
+      "cumulative_revenue": 30564.87,
+      "cumulative_sessions": 4252.0,
+      "snapshot_date": "2026-03-13",
+      "users": 2337.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 17146.0,
+      "cumulative_revenue": 22616.11,
+      "cumulative_sessions": 4782.0,
+      "snapshot_date": "2026-03-14",
+      "users": 2490.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 19359.0,
+      "cumulative_revenue": 35096.68,
+      "cumulative_sessions": 5068.0,
+      "snapshot_date": "2026-03-14",
+      "users": 2510.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 17132.0,
+      "cumulative_revenue": 22372.04,
+      "cumulative_sessions": 4790.0,
+      "snapshot_date": "2026-03-15",
+      "users": 2315.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 19535.0,
+      "cumulative_revenue": 34162.85,
+      "cumulative_sessions": 5155.0,
+      "snapshot_date": "2026-03-15",
+      "users": 2347.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 16749.0,
+      "cumulative_revenue": 22322.58,
+      "cumulative_sessions": 4750.0,
+      "snapshot_date": "2026-03-16",
+      "users": 2139.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 19232.0,
+      "cumulative_revenue": 33038.63,
+      "cumulative_sessions": 5126.0,
+      "snapshot_date": "2026-03-16",
+      "users": 2172.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 16339.0,
+      "cumulative_revenue": 21259.38,
+      "cumulative_sessions": 4700.0,
+      "snapshot_date": "2026-03-17",
+      "users": 1962.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 18175.0,
+      "cumulative_revenue": 29904.1,
+      "cumulative_sessions": 4879.0,
+      "snapshot_date": "2026-03-17",
+      "users": 1983.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 15947.0,
+      "cumulative_revenue": 20308.16,
+      "cumulative_sessions": 4611.0,
+      "snapshot_date": "2026-03-18",
+      "users": 1798.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 17485.0,
+      "cumulative_revenue": 28597.83,
+      "cumulative_sessions": 4743.0,
+      "snapshot_date": "2026-03-18",
+      "users": 1793.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 15331.0,
+      "cumulative_revenue": 19991.84,
+      "cumulative_sessions": 4475.0,
+      "snapshot_date": "2026-03-19",
+      "users": 1631.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 16740.0,
+      "cumulative_revenue": 26696.03,
+      "cumulative_sessions": 4563.0,
+      "snapshot_date": "2026-03-19",
+      "users": 1613.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 14463.0,
+      "cumulative_revenue": 18736.46,
+      "cumulative_sessions": 4259.0,
+      "snapshot_date": "2026-03-20",
+      "users": 1462.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 15587.0,
+      "cumulative_revenue": 25226.66,
+      "cumulative_sessions": 4280.0,
+      "snapshot_date": "2026-03-20",
+      "users": 1427.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 13590.0,
+      "cumulative_revenue": 17712.18,
+      "cumulative_sessions": 3996.0,
+      "snapshot_date": "2026-03-21",
+      "users": 1287.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 14134.0,
+      "cumulative_revenue": 23714.87,
+      "cumulative_sessions": 3894.0,
+      "snapshot_date": "2026-03-21",
+      "users": 1236.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 12085.0,
+      "cumulative_revenue": 14991.1,
+      "cumulative_sessions": 3561.0,
+      "snapshot_date": "2026-03-22",
+      "users": 1099.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 12720.0,
+      "cumulative_revenue": 21146.98,
+      "cumulative_sessions": 3512.0,
+      "snapshot_date": "2026-03-22",
+      "users": 1048.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 10803.0,
+      "cumulative_revenue": 13655.87,
+      "cumulative_sessions": 3216.0,
+      "snapshot_date": "2026-03-23",
+      "users": 934.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 10930.0,
+      "cumulative_revenue": 18448.41,
+      "cumulative_sessions": 3039.0,
+      "snapshot_date": "2026-03-23",
+      "users": 856.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 8926.0,
+      "cumulative_revenue": 11069.27,
+      "cumulative_sessions": 2689.0,
+      "snapshot_date": "2026-03-24",
+      "users": 747.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 9399.0,
+      "cumulative_revenue": 15959.99,
+      "cumulative_sessions": 2612.0,
+      "snapshot_date": "2026-03-24",
+      "users": 695.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 6873.0,
+      "cumulative_revenue": 8509.16,
+      "cumulative_sessions": 2070.0,
+      "snapshot_date": "2026-03-25",
+      "users": 554.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 7514.0,
+      "cumulative_revenue": 12928.54,
+      "cumulative_sessions": 2120.0,
+      "snapshot_date": "2026-03-25",
+      "users": 527.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 4825.0,
+      "cumulative_revenue": 5733.15,
+      "cumulative_sessions": 1437.0,
+      "snapshot_date": "2026-03-26",
+      "users": 369.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 5087.0,
+      "cumulative_revenue": 8672.5,
+      "cumulative_sessions": 1437.0,
+      "snapshot_date": "2026-03-26",
+      "users": 339.0,
+      "variant": "treatment"
+    },
+    {
+      "cumulative_events": 2590.0,
+      "cumulative_revenue": 2981.76,
+      "cumulative_sessions": 841.0,
+      "snapshot_date": "2026-03-27",
+      "users": 194.0,
+      "variant": "control"
+    },
+    {
+      "cumulative_events": 2823.0,
+      "cumulative_revenue": 4717.18,
+      "cumulative_sessions": 846.0,
+      "snapshot_date": "2026-03-27",
+      "users": 173.0,
+      "variant": "treatment"
+    }
+  ],
+  "experiment": {
+    "allocation": {
+      "control": 0.5,
+      "treatment": 0.5
+    },
+    "guardrails": [
+      "sessions_per_user",
+      "support_tickets_per_user",
+      "avg_session_duration_seconds"
+    ],
+    "hypothesis": "A faster autocomplete experience increases purchase conversion without increasing support burden.",
+    "id": "search_autocomplete_refresh",
+    "owner": "product_analytics",
+    "sample_profile": "clean",
+    "synthetic": true,
+    "title": "Search autocomplete refresh"
+  },
+  "guardrails": [
+    {
+      "avg_session_duration_seconds": 325.7345250723,
+      "experiment_name": "search_autocomplete_refresh",
+      "high_priority_tickets_per_user": 0.0080321285,
+      "negative_revenue_user_rate": 0.0,
+      "sessions_per_user": 4.4662650602,
+      "support_tickets_per_user": 0.0277108434,
+      "variant": "control"
+    },
+    {
+      "avg_session_duration_seconds": 328.9083115181,
+      "experiment_name": "search_autocomplete_refresh",
+      "high_priority_tickets_per_user": 0.006374502,
+      "negative_revenue_user_rate": 0.0,
+      "sessions_per_user": 4.5625498008,
+      "support_tickets_per_user": 0.0330677291,
+      "variant": "treatment"
+    }
+  ],
+  "limitations": [
+    "All records are deterministic synthetic data; they do not represent production users or adoption.",
+    "The conversion confidence interval uses a normal approximation for a two-proportion difference.",
+    "Guardrail comparisons are descriptive and should be confirmed with a pre-registered operating plan.",
+    "The browser CSV panel validates schema locally but does not upload or analyze private data."
+  ],
+  "lineage": [
+    {
+      "artifact": "data/sample/*.csv",
+      "description": "Deterministic synthetic product sources generated with an explicit seed.",
+      "stage": "source"
+    },
+    {
+      "artifact": "data/warehouse/experiment_forge.duckdb",
+      "description": "DuckDB raw, staging, intermediate, and mart models built from the CSV contract.",
+      "stage": "warehouse"
+    },
+    {
+      "artifact": "quality.checks.run_quality_audit",
+      "description": "Assignment, temporal, source, metric, mart, and guardrail checks.",
+      "stage": "quality"
+    },
+    {
+      "artifact": "analysis.experiment_readout.analyze_experiment",
+      "description": "Primary two-proportion test, secondary continuous test, practical threshold, and decision mapping.",
+      "stage": "analysis"
+    },
+    {
+      "artifact": "web/data/experiments/*.json",
+      "description": "Stable JSON payload consumed by the credential-free Decision Desk.",
+      "stage": "browser"
+    }
+  ],
+  "methodology": {
+    "multiple_testing": {
+      "family": "The pre-specified primary conversion metric and revenue-per-user secondary metric.",
+      "method": "Holm-Bonferroni",
+      "segments": "Segment cuts are exploratory and are not used to upgrade the launch decision."
+    },
+    "practical_significance": {
+      "explanation": "A statistically supported result must also clear the minimum relative lift threshold before launch or stop.",
+      "threshold": 0.01
+    },
+    "primary_metric": {
+      "denominator": "canonically assigned users",
+      "grain": "assigned_user",
+      "label": "Purchase conversion",
+      "name": "conversion_rate",
+      "numerator": "users with >=1 post-assignment purchase event"
+    },
+    "uncertainty": "95% normal-approximation confidence interval for the treatment minus control conversion-rate difference."
+  },
+  "metrics": {
+    "avg_session_duration_seconds": {
+      "decision_role": "guardrail",
+      "definition": "average post-assignment session duration",
+      "grain": "session",
+      "owner": "product_analytics"
+    },
+    "conversion_rate": {
+      "decision_role": "primary",
+      "denominator": "canonically assigned users",
+      "grain": "assigned_user",
+      "numerator": "users with >=1 post-assignment purchase event",
+      "owner": "product_analytics"
+    },
+    "revenue_per_user": {
+      "decision_role": "secondary",
+      "definition": "positive post-assignment order revenue divided by assigned users",
+      "grain": "assigned_user",
+      "owner": "finance_analytics"
+    },
+    "sessions_per_user": {
+      "decision_role": "guardrail",
+      "definition": "post-assignment sessions divided by assigned users",
+      "grain": "assigned_user",
+      "owner": "product_analytics"
+    },
+    "support_tickets_per_user": {
+      "decision_role": "guardrail",
+      "definition": "post-assignment support tickets divided by assigned users",
+      "grain": "assigned_user",
+      "owner": "customer_ops_analytics"
+    }
+  },
+  "quality": {
+    "checks": [
+      {
+        "detail": "Assignment split p-value is 0.77730.",
+        "name": "sample_ratio_mismatch",
+        "observed": 0.7772974108,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 0.001
+      },
+      {
+        "detail": "0 duplicate experiment/user assignment rows found.",
+        "name": "duplicate_assignments",
+        "observed": 0,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 0
+      },
+      {
+        "detail": "0 users were assigned to multiple variants.",
+        "name": "multiple_variant_assignments",
+        "observed": 0,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 0
+      },
+      {
+        "detail": "0 assignment timestamps are missing.",
+        "name": "missing_assignment_timestamps",
+        "observed": 0,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 0
+      },
+      {
+        "detail": "0 events occurred before canonical assignment.",
+        "name": "events_before_assignment",
+        "observed": 0,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 0
+      },
+      {
+        "detail": "0 events have null event_name values.",
+        "name": "null_event_names",
+        "observed": 0,
+        "severity": "warning",
+        "status": "pass",
+        "threshold": 0
+      },
+      {
+        "detail": "0 order rows have negative revenue without refund modeling.",
+        "name": "negative_revenue",
+        "observed": 0,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 0
+      },
+      {
+        "detail": "mart_experiment_readout has 2 rows.",
+        "name": "mart_experiment_readout_rows",
+        "observed": 2,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 2
+      },
+      {
+        "detail": "mart_segment_readout has 6 rows.",
+        "name": "mart_segment_readout_rows",
+        "observed": 6,
+        "severity": "critical",
+        "status": "pass",
+        "threshold": 6
+      },
+      {
+        "detail": "Treatment/control sessions per user ratio is 1.022.",
+        "name": "guardrail_sessions_per_user",
+        "observed": 1.0215582235,
+        "severity": "warning",
+        "status": "pass",
+        "threshold": 0.98
+      }
+    ],
+    "summary": {
+      "failed": 0,
+      "passed": 10,
+      "status": "pass",
+      "total_checks": 10,
+      "warnings": 0
+    }
+  },
+  "schema_version": "1.0",
+  "segments": [
+    {
+      "assigned_users": 840,
+      "conversion_rate": 0.1130952381,
+      "experiment_name": "search_autocomplete_refresh",
+      "revenue_per_user": 7.06,
+      "segment": "new",
+      "sessions_per_user": 3.1761904762,
+      "support_tickets_per_user": 0.0285714286,
+      "variant": "control"
+    },
+    {
+      "assigned_users": 821,
+      "conversion_rate": 0.1851400731,
+      "experiment_name": "search_autocomplete_refresh",
+      "revenue_per_user": 11.4293300853,
+      "segment": "new",
+      "sessions_per_user": 3.2119366626,
+      "support_tickets_per_user": 0.0511571255,
+      "variant": "treatment"
+    },
+    {
+      "assigned_users": 490,
+      "conversion_rate": 0.5489795918,
+      "experiment_name": "search_autocomplete_refresh",
+      "revenue_per_user": 41.8286122449,
+      "segment": "power",
+      "sessions_per_user": 7.2571428571,
+      "support_tickets_per_user": 0.0224489796,
+      "variant": "control"
+    },
+    {
+      "assigned_users": 547,
+      "conversion_rate": 0.6234003656,
+      "experiment_name": "search_autocomplete_refresh",
+      "revenue_per_user": 53.760511883,
+      "segment": "power",
+      "sessions_per_user": 7.3436928702,
+      "support_tickets_per_user": 0.012797075,
+      "variant": "treatment"
+    },
+    {
+      "assigned_users": 1160,
+      "conversion_rate": 0.2155172414,
+      "experiment_name": "search_autocomplete_refresh",
+      "revenue_per_user": 13.9510517241,
+      "segment": "returning",
+      "sessions_per_user": 4.2215517241,
+      "support_tickets_per_user": 0.0293103448,
+      "variant": "control"
+    },
+    {
+      "assigned_users": 1142,
+      "conversion_rate": 0.3187390543,
+      "experiment_name": "search_autocomplete_refresh",
+      "revenue_per_user": 21.5866987741,
+      "segment": "returning",
+      "sessions_per_user": 4.2014010508,
+      "support_tickets_per_user": 0.0297723292,
+      "variant": "treatment"
+    }
+  ],
+  "source_manifest": {
+    "files": {
+      "raw_events.csv": {
+        "rows": 72316,
+        "sha256": "2363d5f45754da3b3cfc5facf90d580b5aca7bc4c1dba47b7cf8a345a9f868e2"
+      },
+      "raw_experiment_assignments.csv": {
+        "rows": 5000,
+        "sha256": "be610e5737918a709ef665a6837a196f2c6b2e06125c7cc983ec5feb283ab02e"
+      },
+      "raw_feature_exposures.csv": {
+        "rows": 5000,
+        "sha256": "6092827cc9423537ad70720acef2c0cf06337ec6f48f4a81be22fd713b6b5435"
+      },
+      "raw_orders.csv": {
+        "rows": 1865,
+        "sha256": "009f12d9fdfae5c37683dd2988811336bfcc4cace6dbfe15ff90e5585ffabdd8"
+      },
+      "raw_sessions.csv": {
+        "rows": 22573,
+        "sha256": "3e6b3f8c028e317f0461b90ea4c35722a0d8425926ef153a13d791f3299e07f7"
+      },
+      "raw_support_tickets.csv": {
+        "rows": 152,
+        "sha256": "57a5df49a0a52a4e6acfceaeaafc532131d863f63b36b8e4644bbd3374ff6e94"
+      },
+      "raw_user_daily_snapshots.csv": {
+        "rows": 70000,
+        "sha256": "099643ba96ff4a017f7898976546642983078c35fb437b630751143e0b0b1969"
+      },
+      "raw_users.csv": {
+        "rows": 5000,
+        "sha256": "9727e45e3aedc774d05f8d3780c7aaf0d88f8eba9025c4a3c275dbc604ec23f2"
+      }
+    },
+    "n_users_generated": 5000,
+    "n_users_requested": 5000,
+    "seed": 84
+  },
+  "summary": {
+    "adjusted_p_value": 0.0,
+    "canonical_assigned_users": 5000,
+    "control_users": 2490.0,
+    "decision": "launch",
+    "distinct_users": 5000,
+    "experiment_name": "search_autocomplete_refresh",
+    "first_assignment_at": "2026-03-01T00:00:00",
+    "last_assignment_at": "2026-03-14T23:55:00",
+    "quality_status": "pass",
+    "relative_lift": 0.3846438351,
+    "treatment_users": 2510.0
+  },
+  "ui": {
+    "status_label": "Synthetic sample \u2022 clean",
+    "takeaway": "The treatment clears the practical and adjusted statistical thresholds with no critical quality failures."
+  }
+}

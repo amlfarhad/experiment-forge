@@ -1,0 +1,27 @@
+{
+  "experiments": [
+    {
+      "assigned_users": 5000,
+      "decision": "investigate",
+      "id": "checkout_progress_indicator",
+      "path": "experiments/checkout_progress_indicator.json",
+      "quality_status": "fail",
+      "relative_lift": 0.1747513297,
+      "sample_profile": "flawed",
+      "takeaway": "A positive-looking lift is not decision-ready while assignment and event data fail quality gates.",
+      "title": "Checkout progress indicator"
+    },
+    {
+      "assigned_users": 5000,
+      "decision": "launch",
+      "id": "search_autocomplete_refresh",
+      "path": "experiments/search_autocomplete_refresh.json",
+      "quality_status": "pass",
+      "relative_lift": 0.3846438351,
+      "sample_profile": "clean",
+      "takeaway": "The treatment clears the practical and adjusted statistical thresholds with no critical quality failures.",
+      "title": "Search autocomplete refresh"
+    }
+  ],
+  "schema_version": "1.0"
+}

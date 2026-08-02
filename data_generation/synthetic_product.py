@@ -33,7 +33,14 @@ def _timestamp_series(start: str, minutes: np.ndarray) -> pd.Series:
     return pd.Series(base + pd.to_timedelta(minutes, unit="m"))
 
 
-def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 5000) -> DemoDataManifest:
+def generate_demo_data(
+    output_dir: str | Path,
+    seed: int = 42,
+    n_users: int = 5000,
+    experiment_name: str = EXPERIMENT_NAME,
+    quality_profile: str = "flawed",
+    treatment_lift: float | None = None,
+) -> DemoDataManifest:
     """Generate raw source CSVs for an end-to-end experimentation workflow.
 
     The data is intentionally rich enough to support warehouse modeling:
@@ -41,6 +48,9 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
     and daily user snapshots. It also includes realistic data quality issues
     so the platform can demonstrate audit behavior.
     """
+
+    if quality_profile not in {"flawed", "clean"}:
+        raise ValueError("quality_profile must be 'flawed' or 'clean'")
 
     rng = np.random.default_rng(seed)
     output_path = Path(output_dir)
@@ -71,20 +81,23 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
     assignments = pd.DataFrame(
         {
             "assignment_id": np.arange(1, n_users + 1),
-            "experiment_name": EXPERIMENT_NAME,
+            "experiment_name": experiment_name,
             "user_id": user_ids,
             "variant": variants,
             "assigned_at": _timestamp_series("2026-03-01", assigned_minutes).dt.strftime("%Y-%m-%d %H:%M:%S"),
         }
     )
 
-    duplicate_count = max(8, n_users // 160)
-    duplicates = assignments.sample(duplicate_count, random_state=seed).copy()
-    duplicates["assignment_id"] = np.arange(n_users + 1, n_users + 1 + duplicate_count)
-    switch_count = max(2, duplicate_count // 5)
-    switched = duplicates.index[:switch_count]
-    duplicates.loc[switched, "variant"] = np.where(duplicates.loc[switched, "variant"] == CONTROL, TREATMENT, CONTROL)
-    assignments = pd.concat([assignments, duplicates], ignore_index=True)
+    if quality_profile == "flawed":
+        duplicate_count = max(8, n_users // 160)
+        duplicates = assignments.sample(duplicate_count, random_state=seed).copy()
+        duplicates["assignment_id"] = np.arange(n_users + 1, n_users + 1 + duplicate_count)
+        switch_count = max(2, duplicate_count // 5)
+        switched = duplicates.index[:switch_count]
+        duplicates.loc[switched, "variant"] = np.where(
+            duplicates.loc[switched, "variant"] == CONTROL, TREATMENT, CONTROL
+        )
+        assignments = pd.concat([assignments, duplicates], ignore_index=True)
 
     canonical_assignments = assignments.sort_values(["assigned_at", "assignment_id"]).drop_duplicates(
         ["experiment_name", "user_id"]
@@ -117,7 +130,9 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
         assigned_at = pd.Timestamp(assignment["assigned_at"])
 
         n_sessions = int(rng.poisson(segment_session_lambda[segment])) + 1
-        conversion_prob = segment_base_conversion[segment] + (0.014 if variant == TREATMENT else 0.0)
+        conversion_prob = segment_base_conversion[segment] + (
+            (0.014 if treatment_lift is None else treatment_lift) if variant == TREATMENT else 0.0
+        )
         checkout_prob = min(0.55, conversion_prob * 4.8)
         cumulative_events = 0
         cumulative_sessions = 0
@@ -126,7 +141,7 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
         exposure_rows.append(
             {
                 "exposure_id": exposure_id,
-                "experiment_name": EXPERIMENT_NAME,
+                "experiment_name": experiment_name,
                 "user_id": user_id,
                 "variant": variant,
                 "surface": "checkout",
@@ -215,7 +230,7 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
                 {
                     "snapshot_date": snapshot_date,
                     "user_id": user_id,
-                    "experiment_name": EXPERIMENT_NAME,
+                    "experiment_name": experiment_name,
                     "variant": variant,
                     "segment": segment,
                     "cumulative_sessions": cumulative_sessions if day == 13 else int(cumulative_sessions * (day + 1) / 14),
@@ -231,14 +246,14 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
     tickets = pd.DataFrame(ticket_rows)
     snapshots = pd.DataFrame(snapshot_rows)
 
-    if not events.empty:
+    if quality_profile == "flawed" and not events.empty:
         null_count = max(4, len(events) // 900)
         null_indices = events.sample(null_count, random_state=seed + 10).index
         events.loc[null_indices, "event_name"] = None
         early_indices = events.sample(max(3, len(events) // 1100), random_state=seed + 11).index
         events.loc[early_indices, "event_at"] = "2026-02-20 00:00:00"
 
-    if not orders.empty:
+    if quality_profile == "flawed" and not orders.empty:
         negative_indices = orders.sample(max(2, len(orders) // 150), random_state=seed + 12).index
         orders.loc[negative_indices, "revenue"] = -10.00
 
@@ -275,4 +290,4 @@ def generate_demo_data(output_dir: str | Path, seed: int = 42, n_users: int = 50
         frame.to_csv(path, index=False)
         files.append(path)
 
-    return DemoDataManifest(files=files, n_users=n_users, experiment_name=EXPERIMENT_NAME, seed=seed)
+    return DemoDataManifest(files=files, n_users=n_users, experiment_name=experiment_name, seed=seed)

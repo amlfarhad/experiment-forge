@@ -13,8 +13,16 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements-dev.txt
+      - name: Install Playwright browser
+        run: python -m playwright install --with-deps chromium
       - name: Run tests
-        run: python -m pytest tests -q
+        run: python -m pytest tests --ignore=tests/browser -q
       - name: Run platform demo
         run: python forge.py demo --workspace . --users 1000 --seed 42
+      - name: Run Decision Desk artifact build
+        run: python forge.py web-build --workspace . --output web/data --users 1000 --seed 42
+      - name: Run browser regression
+        run: |
+          python -m http.server 8766 --bind 127.0.0.1 --directory . > /tmp/experiment-forge-http.log 2>&1 &
+          EXPERIMENT_FORGE_BASE_URL=http://127.0.0.1:8766 python -m pytest tests/browser -q
