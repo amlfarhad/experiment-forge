@@ -4,7 +4,7 @@ Experimentation analytics platform and credential-free decision product built wi
 
 Experiment Forge turns raw product event data into tested experiment marts, audits common experimentation failures, analyzes treatment impact, and gives a product manager a traceable launch / stop / continue / investigate decision.
 
-The Decision Desk is intended to be reviewed locally from this repository; no hosted demo is required.
+The Decision Desk is intended to be reviewed locally from this repository; no hosted deployment is required.
 
 ## Platform Capabilities
 
