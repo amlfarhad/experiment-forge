@@ -4,7 +4,7 @@ Experimentation analytics platform and credential-free decision product built wi
 
 Experiment Forge turns raw product event data into tested experiment marts, audits common experimentation failures, analyzes treatment impact, and gives a product manager a traceable launch / stop / continue / investigate decision.
 
-Live product: [Experiment Forge Decision Desk](https://oppalpha.vercel.app/) · Repository: [github.com/amlfarhad/experiment-forge](https://github.com/amlfarhad/experiment-forge)
+The Decision Desk is intended to be reviewed locally from this repository; no hosted demo is required.
 
 ## Platform Capabilities
 
@@ -46,12 +46,6 @@ python3 -m http.server 8000 --directory web
 ```
 
 Open [http://localhost:8000](http://localhost:8000). The UI reads `web/data/catalog.json` and the experiment payloads generated from raw CSVs, DuckDB marts, the quality audit, and statistical analysis. The CSV panel validates documented headers locally; it does not upload private data or pretend to analyze it.
-
-Deploy the static product from the repository root with Vercel:
-
-```bash
-vercel deploy web --prod -y
-```
 
 See [`docs/methodology.md`](docs/methodology.md), [`docs/data_lineage.md`](docs/data_lineage.md), and [`docs/limitations.md`](docs/limitations.md) for the evidence contract and boundaries.
 
